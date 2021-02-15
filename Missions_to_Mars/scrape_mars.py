@@ -13,14 +13,12 @@ def init_browser():
 
 def scrape():
     browser=init_browser()
-    dictionaryMars={}
 
     # NASA Mars News
 
     # URL of page to be scraped
     url="https://mars.nasa.gov/news/"
     browser.visit(url)
-    time.sleep(1)
     # Beautiful Soup
     html=browser.html
     soup=BeautifulSoup(html,'html.parser')
@@ -37,6 +35,8 @@ def scrape():
     # Beautiful Soup
     html_image=browser.html
     soup=BeautifulSoup(html_image,'html.parser')
+    # Travel to full image page
+    browser.links.find_by_partial_text("FULL IMAGE").click()
     # Store the full image link
     new_html_image=browser.html
     soup=BeautifulSoup(new_html_image,'html.parser')
@@ -53,8 +53,7 @@ def scrape():
     marsDF=table[2]
     marsDF.columns=["Description","Value"]
     # Convert to html
-    marsHtml=marsDF.to_html()
-    marsHtml=marsHtml.replace('\n',"")
+    marsHtml=marsDF.to_html(classes="table table-striped")
 
     # Mars Hemispheres
 
@@ -74,8 +73,9 @@ def scrape():
     for item in hemisphereInfo:
         # Store hemisphere name
         title=item.find('h3').text
+        title=title.replace("Enhanced","")
         # Grab partial image link
-        partialImage=item.find('a', class_='itemLink product-item')['href']
+        partialImage=item.find('a')['href']
         browser.visit(main_url+partialImage)
         # Store the full url
         fullUrl=browser.html
@@ -85,7 +85,7 @@ def scrape():
         # Add information to the hemisphere list
         hemisphere_image_urls.append({"title":title, "image_url":imageUrl})   
         
-    dictionaryMars={
+    mars_data={
         "news_title": news_title,
         "news_p": news_p,
         "featured_image_url": featured_image_url,
@@ -95,4 +95,4 @@ def scrape():
 
     browser.quit()
 
-    return dictionaryMars
+    return mars_data
