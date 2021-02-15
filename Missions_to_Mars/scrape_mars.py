@@ -28,20 +28,20 @@ def scrape():
     news_p=newsInfo.find('div', class_='article_teaser_body').get_text()
 
     # JPL Mars Space Images - Featured Image
-
+    ## NO FEATURED IMAGE TO SCRAPE
     # URL of page to be scraped
-    space_url="https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars"
-    browser.visit(space_url)
+    #space_url="https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars"
+    #browser.visit(space_url)
     # Beautiful Soup
-    html_image=browser.html
-    soup=BeautifulSoup(html_image,'html.parser')
+    #html_image=browser.html
+    #soup=BeautifulSoup(html_image,'html.parser')
     # Travel to full image page
-    browser.links.find_by_partial_text("FULL IMAGE").click()
+    #browser.links.find_by_partial_text("FULL IMAGE").click()
     # Store the full image link
-    new_html_image=browser.html
-    soup=BeautifulSoup(new_html_image,'html.parser')
-    featured_image=soup.find_all('img')[74]['src']
-    featured_image_url="https://www.jpl.nasa.gov"+featured_image
+    #new_html_image=browser.html
+    #soup=BeautifulSoup(new_html_image,'html.parser')
+    #featured_image=soup.find_all('img')[74]['src']
+    #featured_image_url="https://www.jpl.nasa.gov"+featured_image
 
     # Mars Facts
 
@@ -88,7 +88,6 @@ def scrape():
     mars_data={
         "news_title": news_title,
         "news_p": news_p,
-        "featured_image_url": featured_image_url,
         "mars_fact_table": str(marsHtml),
         "hemisphere_images": hemisphere_image_urls
     }
