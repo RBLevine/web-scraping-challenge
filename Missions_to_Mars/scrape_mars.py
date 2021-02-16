@@ -85,13 +85,14 @@ def scrape():
         # Add information to the hemisphere list
         hemisphere_image_urls.append({"title":title, "image_url":imageUrl})   
         
-    mars_data={
+    mars_dict={
         "news_title": news_title,
         "news_p": news_p,
+        "featured_image_url":"http://www.trbimg.com/img-57461cf0/turbine/os-mars-transform-from-wet-planet-to-dry-20160525",
         "mars_fact_table": str(marsHtml),
         "hemisphere_images": hemisphere_image_urls
     }
 
     browser.quit()
 
-    return mars_data
+    return mars_dict

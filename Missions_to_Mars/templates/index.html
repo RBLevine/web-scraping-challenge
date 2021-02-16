@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"></html>
 
 <head>
     <meta charset="UTF-8">
@@ -22,30 +22,35 @@
     </div>"
 
     <!--Latest News Section-->
-    <div class="row">
-        <div class="col-md-12">
-            <h2><u>Latest Mars News</u></h2>
-            <h3 class="heading">{{mars_data.news_title}}</h3>
-            <p>{{mars_data.news_p}}</p>
+        <div class="row">
+            <div class="col-md-12">
+                <h2><u>Latest Mars News</u></h2>
+            </div>
         </div>
-    </div>
+    <br>
+        <div class="row">
+            <div class="col-md-12">
+                <h3>{{mars_dict.news_title}}</h3>
+                <p>{{mars_dict.news_p}}</p>
+            </div>
+        </div>
 
     <div class="row">
         <!--Featured Mars Image-->
         <div class="col-md-8">
             <h4><b>Featured Mars Image</b></h4>
-            <img src={{mars_data.featured_image_url}} height=auto width=750px>
+            <img src="{{mars_dict.featured_image_url}}" style="max-width:100%"; max-height: auto>
         </div>
 
         <!--Mars Facts Table-->    
         <div class="col-md-4">
             <div class="boxborder">
-                <h5>Mars Facts</h5>
-                <p>{{mars_data.mars_fact_table | safe}}</p>
+                <h4>Mars Facts</h4>
+                <p>{{mars_dict.mars_fact_table | safe}}</p>
             </div>
         </div>
     </div>
-
+    <br>
     <!--Mars Hemispheres-->
     <div class="row" style="margin-top: 80px;">
         <div class="page-header">
@@ -53,15 +58,18 @@
         </div>
 
         <!--Loop through hemispheres images and titles-->
-        {% for hemisphere in mars_data.hemisphere_image_urls %}
-            div class="col-md-6">
-            <div class="thumbnail">
-                <img src="{{hemisphere.img_url}}">
+        {% for hemisphere in mars_dict.hemisphere_image_urls %}
+            <div class="col-md-6">
+                <div class="box bg-style2">
+                    <div class="col-md-6">
+                        <img class="card-img-top hem-pics" src="{{hemisphere.img_url}}" />
+                        <div class="card-body">
+                            <p class="card-text">{{hemisphere.title</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="caption">
-                <h3><b>{{hemisphere.title}}</b></h3>
-            </div>
-        {% endfor%}
+        {% endfor %}
     </div>
 </body>
 </html>
